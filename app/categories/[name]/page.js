@@ -1,10 +1,19 @@
-import React from 'react'
+import { getDocument } from "@/lib/doc"
+import { getDocumentByCategory } from "@/utils/doc-utils";
 
-const CategoryPage = () => {
+import ContentDisplay from "@/app/components/ContentDisplay";
+
+
+const CategoryPage = ({params : {name}}) => {
+
+  const docs = getDocument();
+  const matchedDocument = getDocumentByCategory(docs, name);
+
+
   return (
-    <div>
-      
-    </div>
+    
+   <ContentDisplay id={matchedDocument[0].id}/>
+
   )
 }
 

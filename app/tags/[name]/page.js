@@ -1,10 +1,20 @@
-import React from 'react'
+import ContentDisplay  from "@/app/components/ContentDisplay"
+import { getDocumentByTag } from "@/utils/doc-utils"
+import { getDocument } from "@/lib/doc"
 
-const TagPage = () => {
+const TagPage = ({params : {name}}) => {
+
+  const docs = getDocument();
+  const matchedDocument = getDocumentByTag(docs, name);
+
+
+
   return (
-    <div>
+    <>
       
-    </div>
+    <ContentDisplay id={matchedDocument[0].id}/>
+
+    </>
   )
 }
 
