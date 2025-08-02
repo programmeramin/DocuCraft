@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import LogoImg from "@/public/logo.svg"
 
 const Logo = () => {
   return (
@@ -8,8 +9,8 @@ const Logo = () => {
         <Link href="/">
           <Image
             className="h-6 w-auto"
-            src="/Logo.svg"
-            alt="Logo"
+            src={LogoImg}
+            alt="logo"
             width={100}
             height={100}
             priority

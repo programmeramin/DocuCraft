@@ -16,3 +16,4 @@ const AuthorPage = ({ params: { name } }) => {
 
 export default AuthorPage;
 
+   
