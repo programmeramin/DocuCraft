@@ -4,24 +4,34 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDebounce } from "../hooks/useDebounce";
 import SearchResult from "./SearchResult";
+import { useRouter } from "next/navigation";
 
 const Search = ({ docs }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [term, setTerm] = useState("");
+  const router = useRouter();
+
 
   function handleChange(event) {
     const value = event.target.value;
     setTerm(value);
     doSearch(value);
   }
-
+     
   const doSearch = useDebounce((term) => {
     const found = docs.filter((doc) => {
       return doc.title.toLowerCase().includes(term.toLowerCase());
-    });
+    });      
     console.log(found);
     setSearchResult(found);
   }, 500);
+
+  function closeSearchResult(event) {
+    event.preventDefault();
+   // setSearchResult([]);
+    router.push(event.target.href);
+    setTerm("");
+  }
 
   return (
     <>
@@ -37,7 +47,7 @@ const Search = ({ docs }) => {
             width={50}
             height={50}
           />
-
+   
           <input
             type="text"
             placeholder="Search"
@@ -49,10 +59,13 @@ const Search = ({ docs }) => {
         </button>
       </div>
 
-       {term && term.trim().length > 0 && (
-         <SearchResult results={searchResult} term={term}/>
-       )}
-
+      {term && term.trim().length > 0 && (
+        <SearchResult
+          results={searchResult}
+          term={term}
+          closeSearchResult={closeSearchResult}
+        />
+      )}
     </>
   );
 };
